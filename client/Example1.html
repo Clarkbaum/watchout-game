@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+text {
+  font: bold 48px monospace;
+}
+
+.enter {
+  fill: green;
+}
+
+.update {
+  fill: #333;
+}
+
+</style>
+<svg width="960" height="500"></svg>
+<!-- basicly the g var below is adding this new  tag-->
+<!-- <g transform=translate(32,250)></g>-->
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+//enter                   //update              //exit
+//data with no elements   data with elements    elements with no data
+
+//creates array of alphabet 
+var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+
+//selects the svg tag at line 18
+//creates a width var that takes the value from the svg tag width (960)
+//creats a height var that takes the value from the svg tag height (500)
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height"),
+    g = svg.append("g").attr("transform", "translate(32," + (height / 2) + ")");
+/*
+g = 
+d3.select("svg")
+  .append("g")
+  .attr("transform", "translate(32, " + (500 / 2) + ")");
+*/
+
+function update(data) {
+
+  // DATA JOIN
+  // Join new data with old elements, if any.
+  //first time through this select wont get any text tags since they are added later
+  //text is the array of nodes selected
+  var text = g.selectAll("text")
+    .data(data);
+
+  // UPDATE
+  // Update old elements as needed by adding class value
+  //<text class="update"> </text>
+  text.attr("class", "update");
+
+  // ENTER
+  // Create new elements as needed.
+  //
+  // ENTER + UPDATE
+  // After merging the entered elements with the update selection,
+  // apply operations to both.
+  //the enter() selects the place holder <text>
+  //appends another text tag
+  //d in the x class comes from the data argument
+  //the enter class is for the color green from the CSS
+  //dy shift along the y-axis on the position of an element or its content
+  //x is the starting point on the x axis
+  text.enter().append("text")
+      .attr("class", "enter")
+      .attr("x", function(d, i) { return i * 32; })
+      .attr("dy", ".35em")
+    .merge(text)
+      .text(function(d) { return d; });
+    console.log("text: ",text)
+
+  // EXIT
+  // Remove old elements as needed.
+  text.exit().remove();
+  
+}
+
+// The initial display.
+update(alphabet);
+
+// Grab a random sample of letters from the alphabet, in alphabetical order.
+d3.interval(function() {
+  update(d3.shuffle(alphabet)
+      .slice(0, Math.floor(Math.random() * 26))
+      .sort());
+}, 1500);
+
+</script>
