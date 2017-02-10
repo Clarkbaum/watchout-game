@@ -1,20 +1,68 @@
 // start slingin' some d3 here.
-function initialize(){
+function init(){
+
+  var gameOptions = {
+    height: 450,
+    width: 700,
+    nEnemies: 30,
+    padding: 20
+  };
+
+
+  var gameStats = {
+    score: 0,
+    bestScore: 0
+  };
+
+  var axes = {
+    x: d3.scale.linear().domain([0,100]).range([0,gameOptions.width]),
+    y: d3.scale.linear().domain([0,100]).range([0,gameOptions.height])
+  };
 
 }
 
 
-function update(data){
-  console.log("d3.select(\"svg\")", d3.select("svg").data(data).enter())
-  var svg = d3.select("svg").data(data);
+
+var gameBoard = d3.select(".board")
+      .append("svg")
+      .attr("height", "750")
+      .attr("width", "1300");
+
+
+
+function update(){
+
+  //array of objects with x and y
+  var newCoordinates = [];
+
+  for(var i = 0; i < 30; i++){
+    newCoordinates.push(createEnemies());
+  }
+  console.log("newCoordinates", newCoordinates);
+
+
+
+  var circle = gameBoard.selectAll("svg").data(newCoordinates);
 
   //update
   //enter
-  svg
+  circle
     .enter()
-    .append("circle");
+    .append("circle")
+    .attr("class", "enemy")
+    .attr("r", 10)
+    .attr("cy", function(d){return d.y})
+    .attr("cx", function(d){return d.x})
+    //.attr("style", 'fill: red'); we dont seem do need this. doing it in the CSS
   //exit
-  svg
+  circle
     .exit()
     .remove();
 }
+
+function createEnemies (){
+ return { x: Math.random()*750, y: Math.random()*750 }; 
+}
+
+init();
+update();

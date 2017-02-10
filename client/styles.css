@@ -2,4 +2,12 @@
 
 /* Note: an asteroid image is included in this repo.
 Feel free to use it if you like. */
+.enemy{
+  fill: red;
+}
+
+.board{
+  border-style: dotted dotted dotted dotted;
+  height: 750px;
+}
 
