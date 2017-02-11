@@ -6,8 +6,13 @@ Feel free to use it if you like. */
   fill: red;
 }
 
+.player{
+  fill: green;
+} 
 .svgBoard{
   border-style: dotted dotted dotted dotted;
   height: 750px;
 }
+
+
 
