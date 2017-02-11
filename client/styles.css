@@ -2,17 +2,53 @@
 
 /* Note: an asteroid image is included in this repo.
 Feel free to use it if you like. */
+
 .enemy{
   fill: red;
 }
-
 .player{
   fill: green;
-} 
+}
 .svgBoard{
+   background-image: url("http://www.storywarren.com/wp-content/uploads/2016/09/space-1.jpg");
   border-style: dotted dotted dotted dotted;
   height: 750px;
 }
-
-
-
+/*soluction*/
+/*body {
+  margin: 0;
+  font-family: helvetica;
+  position: relative;
+}
+iframe {
+  position: absolute;
+  z-index: 1;
+}
+.mouse {
+  position: absolute;
+  background-color: orange;
+}
+.astroid {
+  background-image: url('asteroid.png');
+  background-size: 100% 100%;
+  position: absolute;
+}
+.vis {
+  background-color: black;
+}
+.scoreboard {
+  width: 250px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px;
+  border-radius: 3px;
+}
+.scoreboard div {
+  line-height: 33px;
+  font-size: 25px;
+  float: right;
+}
+*/
